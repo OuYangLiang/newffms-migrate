@@ -15,13 +15,13 @@ class Consumption(object):
         self.cpnTime = cpnTime
         self.batchNum = batchNum
         self.createBy = createBy
-        self.itemDescs = []
+        self.itemDescs = ''
         self.account = []
         try:
             cursor= conn.cursor()
             cursor.execute('select ITEM_DESC from CONSUMPTION_ITEM WHERE CPN_OID = %s', self.cpnOid)
             for item in cursor.fetchall():
-                self.itemDescs.append(item[0])
+                self.itemDescs = self.itemDescs + ', ' + item[0]
         finally:
             cursor.close()
               
@@ -39,7 +39,7 @@ class Consumption(object):
     def doRecord(self, conn):
         for item in self.account:
             acnt = account.getAccount(conn, item[0])
-            acnt.inc(conn, self.amount)
+            acnt.inc(conn, item[1])
             
     def doReal(self, conn):
         for item in self.account:

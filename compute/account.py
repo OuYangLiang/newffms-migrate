@@ -14,22 +14,18 @@ class Account(object):
         
     def sub(self, conn, amt):
         self.balance = self.balance - amt;
-        if (self.acntType == 'Creditcard'):
-            self.debt = self.debt + amt;
         try:
             cursor= conn.cursor()
-            cursor.execute('update `ACCOUNT` set BALANCE = %s, DEBT = %s where ACNT_OID = %s', [self.balance, self.debt, self.acntOid])
+            cursor.execute('update `ACCOUNT` set BALANCE = %s where ACNT_OID = %s', [self.balance, self.acntOid])
             conn.commit()
         finally:
             cursor.close()
             
     def inc(self, conn, amt):
         self.balance = self.balance + amt;
-        if (self.acntType == 'Creditcard'):
-            self.debt = self.debt - amt;
         try:
             cursor= conn.cursor()
-            cursor.execute('update `ACCOUNT` set BALANCE = %s, DEBT = %s where ACNT_OID = %s', [self.balance, self.debt, self.acntOid])
+            cursor.execute('update `ACCOUNT` set BALANCE = %s where ACNT_OID = %s', [self.balance, self.acntOid])
             conn.commit()
         finally:
             cursor.close()

@@ -27,6 +27,7 @@ class AccountAudit(object):
     def doRecord(self, conn):
         acnt = account.getAccount(conn, self.acntOid)
         acnt.inc(conn, self.amount)
+            
         refacnt = account.getAccount(conn, self.refAcntOid)
         refacnt.sub(conn, self.amount)
         
@@ -36,10 +37,11 @@ class AccountAudit(object):
         
         acnt.sub(conn, self.amount)
         batch = str(uuid.uuid4()).replace('-','')
-        insertAudit(conn, ['转账至：' + refacnt.acntDesc, 'Trans_subtract', self.adtTime, acnt.balance, self.amount, acnt.acntOid, batch, self.adtTime, self.createBy])
+        
+        insertAudit(conn, [u'转账至：' + refacnt.acntDesc, 'Trans_subtract', self.adtTime, acnt.balance, self.amount, acnt.acntOid, batch, self.adtTime, self.createBy])
         
         refacnt.inc(conn, self.amount)
-        insertAudit(conn, ['进账自：' + acnt.acntDesc, 'Trans_add', self.adtTime, refacnt.balance, self.amount, refacnt.acntOid, batch, self.adtTime, self.createBy])
+        insertAudit(conn, [u'进账自：' + acnt.acntDesc, 'Trans_add', self.adtTime, refacnt.balance, self.amount, refacnt.acntOid, batch, self.adtTime, self.createBy])
     
 def getAccountAudit(conn):
     try:

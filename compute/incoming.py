@@ -35,7 +35,7 @@ class Incoming(object):
     def doReal(self, conn):
         acnt = account.getAccount(conn, self.acntOid)
         acnt.inc(conn, self.amount)
-        account_audit.insertAudit(conn, [self.incomingDesc, 'Add', self.cpnTime, acnt.balance, self.amount, self.acntOid, self.batchNum, self.cpnTime, self.createBy])
+        account_audit.insertAudit(conn, [self.incomingDesc, 'Add', self.incomingDate, acnt.balance, self.amount, self.acntOid, self.batchNum, self.incomingDate, self.createBy])
         
 def getIncomings(conn):
     try:
