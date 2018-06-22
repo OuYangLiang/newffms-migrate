@@ -22,6 +22,7 @@ class Consumption(object):
             cursor.execute('select ITEM_DESC from CONSUMPTION_ITEM WHERE CPN_OID = %s', self.cpnOid)
             for item in cursor.fetchall():
                 self.itemDescs = self.itemDescs + ', ' + item[0]
+            self.itemDescs = self.itemDescs[2:]
         finally:
             cursor.close()
               
