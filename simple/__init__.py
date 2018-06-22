@@ -1,19 +1,17 @@
 # encoding: utf-8  
-from user_type import UserType
-from user_type_operation import UserTypeOperation
-from operation import Operation
-from operation_url import OperationUrl
-from user_profile import UserProfile
-from role_profile import RoleProfile
-from role_operation import RoleOperation
-from module import Module
-from user_role import UserRole
-from category import Category
-
-from incoming import Incoming
-from account_incoming import AccountIncoming
-from account import Account
-
-from consumption import Consumption
-from consumption_item import ConsumptionItem
-from account_consumption import AccountConsumption
+from account_consumption import migrateAccountConsumption
+from account_incoming import migrateAccountIncoming
+from account import migrateAccount
+from category import migrateCategory
+from consumption_item import migrateConsumptionItem
+from consumption import migrateConsumption
+from incoming import migrateIncoming
+from module import migrateModule
+from operation_url import migrateOperationUrl
+from operation import migrateOperation
+from role_operation import migrateRoleOperation
+from role_profile import migrateRoleProfile
+from user_profile import migrateUserProfile
+from user_role import migrateUserRole
+from user_type_operation import migrateUserTypeOperation
+from user_type import migrateUserType

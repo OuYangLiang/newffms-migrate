@@ -45,7 +45,7 @@ class Consumption(object):
         for item in self.account:
             acnt = account.getAccount(conn, item[0])
             acnt.sub(conn, item[1])
-            account_audit.insertAudit(conn, [self.itemDescs, 'Subtract', self.cpnTime, acnt.balance, item[1], item[0], self.batchNum, self.cpnTime, self.createBy])
+            account_audit.insertAudit(conn, [self.itemDescs, 'Subtract', self.cpnTime, acnt.balance, -item[1], item[0], self.batchNum, self.cpnTime, self.createBy])
         
 def getConsumptions(conn):
     try:
